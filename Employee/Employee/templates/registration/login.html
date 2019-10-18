@@ -1,0 +1,17 @@
+<html>
+    <style>
+        h2{
+            float:right;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <h2 style="color:blue;">Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</html>
