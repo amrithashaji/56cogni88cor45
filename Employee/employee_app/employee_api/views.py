@@ -6,11 +6,14 @@ from django.http import JsonResponse
 
 
 class allEmployees(generics.ListCreateAPIView):
+    """ Employee List View """
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
 
 class  detailsapi(generics.ListCreateAPIView):
+    """ Employee details View """
+
     def get(self, request, pk):
         employe =  list(Employee.objects.filter(pk=pk).values())
         data =  dict()

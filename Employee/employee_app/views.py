@@ -8,12 +8,18 @@ import json
 # Create your views here.
 
 def index(request, template_name='employee/home.html'):
+    """ View for rendering home page"""
     return render(request, template_name)
 
 def ajaxHome(request):
+
+    """ View Get Employ list using API and display in the front end"""
+
     url='http://localhost:9000/allEmployees'
+
     response = requests.get(url)
     geodata = response.json()
+
     emp_list  = []
     
     if geodata:
@@ -33,10 +39,15 @@ def ajaxHome(request):
     return HttpResponse(json.dumps(emp_list), content_type='application/json')
 
 def employeDetails(request, empid, template_name='employee/employe_details.html'):
+    """ View for rendering Employee details page"""
+
     return render(request, template_name, {'empid':empid})
 
 
 def ajaxEmployeDetails(request):
+
+    """ View to get Employ details using API and display it in the front end"""
+
     url='http://localhost:9000/detailsapi/'
 
     empid = request.GET.get('empid')
@@ -60,7 +71,8 @@ def ajaxEmployeDetails(request):
 
 
 def add_employee(request, template_name='employee/add_employee.html'):
-
+    """ This view to create new employ"""
+    
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')

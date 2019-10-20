@@ -35,8 +35,9 @@
                         <tr><td>Password: </td><td>` + employe.password + `</td></tr>
                         <tr><td>Phone: </td><td>` + employe.phone + `</td></tr>
                         <tr><td>Address: </td><td>` + employe.address + `</td></tr>
-                        <tr><td>Photo: </td><td>` + employe.photo + `</td></tr>`
-                  
+                        <tr><td>Photo: </td><td>
+                          <img src="` + employe.photo + `" alt="image" width="300" height="333">
+                        </td></tr>`
                 });
               rows += `</table>`
                 $("#loader").append(rows);
@@ -53,6 +54,5 @@
           });
       
         </script>
-
 
 {% endblock %}

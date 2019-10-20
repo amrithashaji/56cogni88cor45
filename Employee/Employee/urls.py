@@ -20,10 +20,14 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView,LogoutView
 
 urlpatterns = [
+    """" Authentication Urls """
     path('login/', LoginView.as_view(), {'template_name': 'login.html'}, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+
+    """" Incuded the app urls here""""
     path('', include('employee_app.urls'))
 ]
 
+""" To include static files """
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,7 +11,7 @@ urlpatterns = [
     path('ajaxEmployeDetails/', views.ajaxEmployeDetails, name='ajaxEmployeDetails'),
     path('add_employee/', views.add_employee, name='add_employee'),
     
-    #Rest apis
+    """ Rest api urls""" 
     path('allEmployees/', api_views.allEmployees.as_view(), name='allEmployees'),
     path('detailsapi/<str:pk>/', api_views.detailsapi.as_view(), name='detailsapi'),
 ]
