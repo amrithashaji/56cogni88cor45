@@ -1,38 +1,52 @@
 {% extends 'employee/base.html' %}
 {% block body_block %}
     <p>The site helps to add create employee and employee details,<br/>
-    can list employee details in a grid format</p>
-{% endblock %}
+    can list employee details in a grid format</p><br/>
 
-{% comment %}
-
-<!DOCTYPE html>
-<html>
-<head>
-  <title>HomePage</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<body>
-  <center>
-     <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'homepage' %}">HomePage</a></li>
-          <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
-          <li><a class="navbar-link" href="{% url 'otherpage' %}">Other</a></li>
-          <li><a class="navbar-link" href="{% url 'about' %}">About</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container">
-            <h2>COMPANY ABC</h2>
+    <div class="container" id="loader"> 
+      <h3 style="color:cornflowerblue;">Employee List</h3>
+      
     </div>
-{% block body_block %}
-<h1>Welcome to the Home-Page</h1>
-<h2> search for others/ </h2>
-<h2>we are in the block of home page</h2>
+    
 {% endblock %}
-</center>
-</body>
-</html>
-{% endcomment %}
+
+{% block bottom_js %}
+<script> type='text/javascript'
+  $(document).ready(function(){
+    $.ajax({
+      url:  '/ajaxHome',
+      type:  'get',
+      
+      success: function  (data) {
+          let rows =  '';
+          rows += `
+          <table class="table table-striped table-bordered">
+          <tr>
+              <th>Employee ID</th>
+              <th>Employee Name</th>
+              <th>Email</th>
+              <th>Action</th>
+          </tr> `
+
+          data.forEach(employe => {
+            rows += `
+            <tr>
+                <td>`+ employe.emp_id + `</td>
+                <td>` + employe.emp_name + `</td>
+                <td>` + employe.emp_email + `</td>
+                <td>
+                  <a href="/employeDetails/`+ employe.emp_id + `/">Details</a>
+                </td>
+            </tr>`
+          });
+        rows += `</table>`
+          $("#loader").append(rows);
+      },
+      error: function  () {
+        console.log("error occured")
+      },
+      });
+    });  
+
+  </script>
+{% endblock %}

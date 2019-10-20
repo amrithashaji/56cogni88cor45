@@ -1,0 +1,58 @@
+{% extends 'employee/base.html' %}
+{% load static %}
+{% block body_block %}
+    <div class="container" id="loader"> 
+        <h3 style="color:cornflowerblue;">Employee Details</h3>
+    </div>
+    <style>
+        .borderless td, .borderless th {
+            border: none;
+        }
+    </style>
+{% endblock %}
+
+{% block bottom_js %}
+
+ 
+<script type='text/javascript'>
+        $(document).ready(function(){
+        
+        var emp = `${{empid}}`.replace('$','')
+        $.ajax({
+            url:  '/ajaxEmployeDetails',
+            type:  'get',
+            data: {'empid': emp},
+            success: function  (data) {
+                let rows =  '';
+                rows += `
+                <table class="table table-striped"> `
+
+                data.forEach(employe => {
+                  rows += `
+                        <tr><td>Employee ID: </td><td>`+ employe.id + `</td></tr>
+                        <tr><td>Employee Name: </td><td> ` + employe.name + `</td></tr>
+                        <tr><td>Email: </td><td>` + employe.email + `</td></tr>
+                        <tr><td>Password: </td><td>` + employe.password + `</td></tr>
+                        <tr><td>Phone: </td><td>` + employe.phone + `</td></tr>
+                        <tr><td>Address: </td><td>` + employe.address + `</td></tr>
+                        <tr><td>Photo: </td><td>` + employe.photo + `</td></tr>`
+                  
+                });
+              rows += `</table>`
+                $("#loader").append(rows);
+            },
+            error: function  () {
+              console.log("error occured")
+            },
+            });
+      
+            $("#btndetail").click(function(){
+              window.open("")
+          }); 
+      
+          });
+      
+        </script>
+
+
+{% endblock %}

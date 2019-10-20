@@ -15,7 +15,7 @@
       <div class="container">
         <ul class="nav navbar-nav">
           <li><a class="navbar-brand" href="">ABC</a></li>
-          <li><a class="navbar-link" href="{% url 'add_employee' %}">Add Employee</a></li>
+          <li><a class="navbar-link" href="{% url 'allEmployees' %}">Add Employee</a></li>
           <li><a class="navbar-link" href="#">View Employees</a></li>
           <li><a class="navbar-link" href="#">View Employee Details</a></li>
         </ul>
@@ -29,8 +29,12 @@
 <h1>Welcome to the Home-Page</h1>
 <h2> search for others/ </h2>
 <h2>we are in the block of home page</h2>
-{% block endblock %}
-{% bottom_js %}
+{% endblock %}
+{% block bottom_js_files %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% endblock %}
+{% block bottom_js %}
+
 {% endblock %}
 </center>
 </body>
